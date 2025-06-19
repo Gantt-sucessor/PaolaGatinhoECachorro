@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>💖 Uma Surpresa Pra Você 💖</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(#87ceeb, #fff);
+    }
+
+    .cenario {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .grama {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      background-color: #4caf50;
+      border-top: 5px solid #3e9442;
+    }
+
+    .nuvem {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      width: 100px;
+      height: 60px;
+      opacity: 0.8;
+      animation: nuvem 30s linear infinite;
+    }
+
+    .nuvem::before,
+    .nuvem::after {
+      content: '';
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .nuvem::before {
+      width: 60px;
+      height: 60px;
+      top: -20px;
+      left: 10px;
+    }
+
+    .nuvem::after {
+      width: 80px;
+      height: 80px;
+      top: -30px;
+      left: 40px;
+    }
+
+    @keyframes nuvem {
+      0% { left: -150px; }
+      100% { left: 100%; }
+    }
+
+    .pet {
+      position: absolute;
+      bottom: 150px;
+      display: flex;
+      gap: 20px;
+      animation: walk 10s linear infinite;
+    }
+
+    .pet img {
+      width: 80px;
+      image-rendering: pixelated;
+    }
+
+    @keyframes walk {
+      0% { left: -200px; }
+      100% { left: 100%; }
+    }
+
+    .message {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-family: 'Comic Sans MS', cursive;
+      font-size: 24px;
+      color: #d6336c;
+      text-shadow: 1px 1px 2px white;
+      user-select: none;
+    }
+
+    .coracao {
+      position: absolute;
+      bottom: 150px;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(45deg);
+      animation: subir 4s linear infinite;
+      opacity: 0.8;
+    }
+
+    .coracao::before,
+    .coracao::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .coracao::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .coracao::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes subir {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cenario">
+    <div class="message">💖 Você é muito especial pra mim! 💖</div>
+
+    <!-- Nuvens -->
+    <div class="nuvem" style="top:50px; animation-delay: 0s;"></div>
+    <div class="nuvem" style="top:100px; animation-delay: 10s;"></div>
+    <div class="nuvem" style="top:70px; animation-delay: 5s;"></div>
+
+    <!-- Pets -->
+    <div class="pet">
+      <!-- Gato -->
+      <img src="https://i.pinimg.com/736x/94/17/0e/94170e56cd23ae6d02f8025d51aa2021.jpg" alt="Gato" />
+      <!-- Cachorro -->
+      <img src="https://i.pinimg.com/736x/54/08/b1/5408b13162322cfe68ae1c13689000c9.jpg" alt="Cachorro" />
+    </div>
+
+    <!-- Grama -->
+    <div class="grama"></div>
+  </div>
+
+  <!-- Música fofa -->
+  <audio autoplay loop>
+    <source src="https://files.catbox.moe/0k1y9p.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    // Frases fofas para trocar
+    const frases = [
+      '💖 Você é muito especial pra mim! 💖',
+      '🌈 Você ilumina meu dia! 🌈',
+      '💕 Te desejo todo amor do mundo! 💕'
+    ];
+
+    const messageEl = document.querySelector('.message');
+    let index = 0;
+
+    function trocarFrase() {
+      index++;
+      if (index >= frases.length) {
+        index = 0;
+      }
+      messageEl.textContent = frases[index];
+    }
+
+    setInterval(trocarFrase, 5000);
+
+    // Função para criar corações
+    function criarCoracao() {
+      const cenario = document.querySelector('.cenario');
+      const coracao = document.createElement('div');
+      coracao.classList.add('coracao');
+      coracao.style.left = Math.random() * window.innerWidth + 'px';
+      coracao.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      cenario.appendChild(coracao);
+
+      setTimeout(() => {
+        coracao.remove();
+      }, 5000);
+    }
+
+    setInterval(criarCoracao, 300);
+  </script>
+</body>
+</html>
